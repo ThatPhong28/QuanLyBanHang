@@ -40,28 +40,23 @@ public class LoginView extends JFrame {
         background.setLayout(new BorderLayout());
         background.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        // Tiêu đề
         JLabel lblTitle = new JLabel("SALES SYSTEM", JLabel.CENTER);
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 26));
         lblTitle.setForeground(Color.RED);
         background.add(lblTitle, BorderLayout.NORTH);
 
-        // FORM LOGIN
         JPanel form = new JPanel(new GridBagLayout());
         form.setOpaque(false); // trong suốt
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        // USER
         JLabel lblUser = new JLabel("Tên đăng nhập:");
         lblUser.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 
         txtUser = new JTextField(20);
         txtUser.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-        txtUser.setBorder(BorderFactory.createLineBorder(Color.GRAY, 2, true));
-
-        // PASS
+    
         JLabel lblPass = new JLabel("Mật khẩu:");
         lblPass.setFont(new Font("Segoe UI", Font.PLAIN, 16));
 
@@ -104,7 +99,6 @@ public class LoginView extends JFrame {
         btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 16));
         btnLogin.setFocusPainted(false);
 
-        // Hover
         btnLogin.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 btnLogin.setBackground(new Color(250, 40, 40));
@@ -128,16 +122,25 @@ public class LoginView extends JFrame {
 
         add(background);
 
-        // Sự kiện
+       
         btnExit.addActionListener(e -> System.exit(0));
         btnLogin.addActionListener(e -> xuLyDangNhap());
-
-        // Enter = login
+     
+        txtUser.addKeyListener(new KeyAdapter() {
+        public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            txtPass.requestFocus();
+             }
+        }
+    });
         txtPass.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER) xuLyDangNhap();
+        public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            xuLyDangNhap();
+             }
             }
         });
+
     }
     private void xuLyDangNhap() {
     String user = txtUser.getText().trim();
